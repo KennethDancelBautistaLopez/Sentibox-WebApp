@@ -4,7 +4,7 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
 	try {
-		const { fullName, username, password, confirmPassword, gender } = req.body;
+		const { fullName, username, password, confirmPassword, gender, role } = req.body;
 
 		if (password !== confirmPassword) {
 			return res.status(400).json({ error: "Passwords don't match" });
@@ -31,7 +31,12 @@ export const signup = async (req, res) => {
 			password: hashedPassword,
 			gender,
 			profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+			
 		});
+		
+		if (role && (role === "Teacher" || role === "Student")) {
+			newUser.role = role;
+		}
 
 		if (newUser) {
 			// Generate JWT token here
@@ -43,6 +48,7 @@ export const signup = async (req, res) => {
 				fullName: newUser.fullName,
 				username: newUser.username,
 				profilePic: newUser.profilePic,
+				role: newUser.role,
 			});
 		} else {
 			res.status(400).json({ error: "Invalid user data" });
@@ -56,7 +62,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
 	try {
 		const { username, password } = req.body;
-		const user = await User.findOne({ username });
+	const user = await User.findOne({ username });
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPasswordCorrect) {
@@ -76,6 +82,30 @@ export const login = async (req, res) => {
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
+
+export const people = async (req, res) => {
+	const role = await User.findById(req.user._id);
+
+	try {
+		if (role != "teacher" && role != "student") {
+			return res.status(401).json({ error: "Unauthorized" });
+		}else{
+			res.status(200).json(req.user);
+		}
+	} catch (error) {
+		console.log("Error in user controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+export const updateUserProfile = (req, res) => {
+	try {
+		res.status(200).json(req.user);
+	} catch (error) {
+		console.log("Error in user controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+}
 
 export const logout = (req, res) => {
 	try {

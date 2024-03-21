@@ -1,68 +1,139 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+background: linear-gradient(rgb(140, 163, 232), rgb(140, 163, 232));
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+::-webkit-scrollbar {
+	width: 8px;
 }
-a:hover {
-  color: #535bf2;
+::-webkit-scrollbar-track {
+	background: #555;
 }
 
-body {
-  margin: 0;
+::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #242424;
+}
+
+.text-outside {
+	position: absolute;
+	top: -30px;
+	left: 10px; 
+	background-color: white;
+	padding: 5px;
+	border: 1px solid black;
+  }
+
+  .container {
+	position: relative;
+	border: 2px solid black;
+	padding: 20px;
+	margin: 20px;
+  }
+
+  .profile-edit-container {
+	max-width: 600px;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background-color: #fff;
+  }
+  
+  .avatar-container {
+	margin-bottom: 20px;
+	display: grid;
+	place-items: center;
+  }
+
+  button{
+	margin-top: 10px;
+  }
+  	
+
+  .avatar-image {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+  }
+  
+  .avatar-selection {
+	margin-bottom: 20px;
+  }
+  
+  .avatar-dropdown {
+	width: 100%;
+	padding: 8px;
+	font-size: 16px;
+  }
+  
+  .change-avatar-btn {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+  }
+  
+  .change-avatar-btn:hover {
+	background-color: #0056b3;
+  }
+  
+  .profile-edit-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+  }
+  .rounded-border {
+  border: 2px solid #000;
+  border-radius: 10px;
+}		
+.example-text {
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-size: 4vw; /* Responsive font size relative to viewport width */
+}
+.text-with-shadow{
+	text-shadow: 12px px px rgba(110, 42, 42, 0.5);
+}
+
+.account-wrapper {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
+.account-container {
+  border: 2px solid #ccc; /* Add border */
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  padding: 20px;
+  width: 400px; /* Adjust width as needed */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.account-info,
+.edit-form {
+  margin-bottom: 20px;
+}
+
+.edit-form input {
+  margin-bottom: 10px;
+}
+
+.edit-form button {
+  margin-right: 10px;
 }
